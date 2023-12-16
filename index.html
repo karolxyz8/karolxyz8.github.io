@@ -3,28 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website</title>
+    <title>Material Design Website</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
+        /* General Styles */
         body {
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url("https://cdn.discordapp.com/attachments/1105507069072773170/1136997332290904084/cyberpunk-2137-papiez-jan-pawel-ii-przerobka.jpg");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 100vh;
+            color: #333333;
+            background-color: #f5f5f5;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .header {
+            background-color: #8e44ad; /* Light Neon Violet */
+            color: #ffffff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        .toggle-theme {
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+        .go-back {
+            font-size: 24px;
+            cursor: pointer;
+            color: #ffffff;
+            border: none;
+            background: none;
+            margin-left: 20px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            padding-top: 80px; /* Adjust padding to compensate for fixed header */
+            text-align: center;
+            display: none;
+        }
+
+        .container.active {
+            display: block;
+        }
+
+        .section-button {
+            padding: 8px 16px;
+            border: none;
+            background-color: transparent;
+            color: #ffffff;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border-radius: 16px;
+            margin: 0 5px;
+            font-weight: 500;
+        }
+
+        .section-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .dark-theme {
+            background-color: #2c3e50; /* Darker background color for dark theme */
+            color: #ffffff;
+        }
+
+        .dark-theme .header {
+            background-color: #5d327c; /* Darker Violet for Dark Theme */
+        }
+
+        .dark-theme .section-button {
+            background-color: rgba(255, 255, 255, 0.1);
         }
     </style>
 </head>
 <body>
-    <!-- Add the audio element with the background music link -->
-    <audio autoplay loop>
-        <source src="https://cdn.discordapp.com/attachments/1105507069072773170/1136989126994968687/tmpq0z7uwbx.mp3" type="audio/mpeg">
-        cyberpapaj popsuty plik.
-    </audio>
+    <div class="header">
+        <button onclick="goBack()" class="go-back">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <div>
+            <button class="section-button" onclick="showSection('section1')">Section 1</button>
+            <button class="section-button" onclick="showSection('section2')">Section 2</button>
+            <button class="section-button" onclick="showSection('section3')">Section 3</button>
+        </div>
+        <button onclick="toggleTheme()" class="toggle-theme">
+            <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+    </div>
 
-    <!-- Add your website content here -->
-    <h1>cyberpapaj 2137</h1>
-    <p>papaja 2137.</p>
+    <div class="container active">
+        <!-- Your main page content goes here -->
+        <h1>Welcome to Material Design Website</h1>
+    </div>
+
+    <div class="container" id="section1">
+        <!-- Section 1 content goes here -->
+        <h2>Section 1</h2>
+        <p>This is the content for Section 1.</p>
+    </div>
+
+    <div class="container" id="section2">
+        <!-- Section 2 content goes here -->
+        <h2>Section 2</h2>
+        <p>This is the content for Section 2.</p>
+    </div>
+
+    <div class="container" id="section3">
+        <!-- Section 3 content goes here -->
+        <h2>Section 3</h2>
+        <img src="https://media1.tenor.com/images/2af26f5d866a3736ec8e4467689c0706/tenor.gif"
+    </video>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('dark-theme');
+            const themeIcon = document.getElementById('themeIcon');
+            
+            if (body.classList.contains('dark-theme')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        }
+
+        function showSection(sectionId) {
+            const containers = document.querySelectorAll('.container');
+            containers.forEach(container => {
+                container.classList.remove('active');
+            });
+            const selectedSection = document.getElementById(sectionId);
+            selectedSection.classList.add('active');
+        }
+
+        function goBack() {
+            const containers = document.querySelectorAll('.container');
+            containers.forEach(container => {
+                container.classList.remove('active');
+            });
+            document.querySelector('.container').classList.add('active');
+        }
+    </script>
 </body>
 </html>
